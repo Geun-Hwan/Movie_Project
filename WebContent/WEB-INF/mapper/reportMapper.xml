@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.ReportDAO">
+	<insert id="insertReport" parameterType="model.ReportVo">
+	
+	<![CDATA[
+		insert into report (writer,write_date,reporter,reson,write_reson,report_date,report_code)			
+		values(#{writer},#{write_date},#{reporter},#{reson},#{write_reson},#{report_date},#{report_code})
+		  ]]>
+	</insert>
+	
+	<select id="allReport" resultType="model.ReportVo" parameterType="map">
+		<![CDATA[
+		select * from(select A.*,Rownum Rnum from(select *from report order by report_date desc)A)
+		where Rnum>=#{start} and Rnum <=#{end}			
+		  ]]>
+	</select>
+	
+	<select id="reportCount" resultType="int" >
+		<![CDATA[
+		select count(*) from report		
+		  ]]>
+	</select>
+	
+	<select id="checkReport" resultType="int" parameterType="map">
+		<![CDATA[
+		select count(*) from report where writer=#{writer} and reporter =#{reporter} and report_code =#{code}		
+		  ]]>
+	</select>
+	
+	<delete id="deleteReport" parameterType="map" >
+	<![CDATA[
+		delete report where writer=#{writer} and reporter =#{reporter} and report_code =#{code}  
+	]]>
+	</delete>
+	
+</mapper>
+   

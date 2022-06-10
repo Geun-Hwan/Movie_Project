@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:task="http://www.springframework.org/schema/task"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					   http://www.springframework.org/schema/task 
+	   					   http://www.springframework.org/schema/task/spring-task-3.0.xsd
+                           http://www.springframework.org/schema/util 
+                           http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+     
+     <bean class='org.springframework.beans.factory.config.PropertyPlaceholderConfigurer'>
+		<property name="location">
+			<value>/WEB-INF/properties/db.properties</value>
+	</property>
+     </bean>
+    <bean class='org.apache.commons.dbcp2.BasicDataSource' id='basic_data_source'>
+		<property name='driverClassName' value='${db.driver}'/>
+		<property name="url" value="${db.url}"/>
+		<property name="username" value='${db.username}'/>
+		<property name="password" value='${db.password}'/>
+	</bean>
+	
+	
+	<!-- 데이터 베이스 접속 정보와 mapper 파일을 관리하는 Bean 	 -->
+	<bean class='org.mybatis.spring.SqlSessionFactoryBean' id='sqlSession'>
+		<property name="dataSource" ref='basic_data_source'/>
+		<property name="mapperLocations" value='/WEB-INF/mapper/*.xml'/>
+	</bean>
+	
+	
+	<!-- 쿼리문을 전달하는 Bean 입니다. 이 Bean을 주입 받아 필요한 쿼리를 실행 -->
+	<bean class='org.mybatis.spring.SqlSessionTemplate' id='sqlSessionTemplate'>
+		<constructor-arg index='0' ref='sqlSession'/>
+	</bean>
+                           
+	<bean id="careerAlarmService" class="controller.Scheduler" />
+    <task:scheduler id="gsScheduler" pool-size="10" />
+    <task:executor id="gsTaskExecutor" pool-size="10" />
+    <task:annotation-driven executor="gsTaskExecutor"
+    scheduler="gsScheduler" />
+    
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+  	<property name="maxUploadSize" value="100000000" />
+  	<property name="maxInMemorySize" value="100000000" />
+  	<property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+	
+	<bean id="movieDAO" class="dao.MovieDAO"></bean>
+	<bean id="memberDAO" class="dao.MemberDAO"></bean>
+	<bean id="reviewDAO" class="dao.ReviewDAO"></bean>
+	<bean id="qnaDAO" class="dao.QnaDAO"></bean>
+	<bean id="answerDAO" class="dao.AnswerDAO"></bean>
+	<bean id="noticeDAO" class="dao.NoticeDAO"></bean>
+	<bean id="reportDAO" class="dao.ReportDAO"></bean>
+	<bean id="ticketDAO" class="dao.TicketDAO"></bean>
+	
+</beans>

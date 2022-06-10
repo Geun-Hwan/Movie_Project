@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.TicketDAO">
+	<insert id="ticketting"  parameterType="model.Ticket">
+		<![CDATA[
+		insert into ticket (userid,title,cinema,moviedate,movietime,ticketdate,seat,movieage,person,price)			
+		values(#{userid},#{title},#{cinema},#{movieDate},#{movieTime},#{ticketDate},#{seat},#{movieAge},#{person},#{price})
+		  ]]>
+	</insert>
+	
+	<select id="myAllTicket" resultType="model.Ticket" parameterType="map">
+	<![CDATA[
+		select * from(select A.*,Rownum Rnum from(select *from ticket where userid=#{userid} order by ticketDate desc)A)
+					where Rnum>=#{start} and Rnum <=#{end}
+	]]>
+	</select>
+	
+	<select id="myNewTicket" resultType="model.Ticket" parameterType="String">
+	<![CDATA[
+		select * from(select A.*,Rownum Rnum from(select *from ticket where userid=#{userid} order by ticketDate desc)A)
+					where Rnum>=1 and Rnum <=3
+	]]>
+	</select>
+	
+	<select id="allUserTicket" resultType="model.Ticket" parameterType="map">
+	<![CDATA[
+		select * from(select A.*,Rownum Rnum from(select *from ticket order by ticketDate desc)A)
+					where Rnum>=#{start} and Rnum <=#{end}
+	]]>
+	</select>
+	
+	<select id="myTicketCount" resultType="int" parameterType="String">
+	<![CDATA[
+		select count(*) from ticket where userid=#{userid}
+	]]>
+	</select>
+	
+	<select id="allTicketCount" resultType="int" >
+	<![CDATA[
+		select count(*) from ticket
+	]]>
+	</select>
+	
+	<select id="seatCheck" resultType="String" parameterType="map">
+	<![CDATA[
+		select seat from ticket where title=#{title} and movieDate=#{movieDate} and movieTime=#{movieTime} and cinema=#{cinema}
+	]]>
+	</select>
+</mapper>
+   

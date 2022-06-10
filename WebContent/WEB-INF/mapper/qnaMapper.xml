@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.QnaDAO">
+	<select id="myQnaList" resultType="model.QnaBoard" parameterType="String">
+		<![CDATA[
+		select * from qnaboard where userid=#{userid} order by write_date desc			
+		  ]]>
+	</select>
+	
+	<insert id="insertQna" parameterType="model.QnaBoard">
+	<![CDATA[
+		insert into qnaboard (num,name,userid,email,category,qna_title,qna_content,write_date,filename,answer)			
+		values(qna_seq.nextval,#{name},#{userid},#{email},#{category},#{qna_title},#{qna_content},sysdate+9/24,#{fileName},null)
+		  ]]>
+	</insert>
+	
+	<select id="allQnaList" resultType="model.QnaBoard">
+		<![CDATA[
+		select * from qnaboard order by write_date desc			
+		  ]]>
+	</select>
+	
+	<update id="answerCheck" parameterType="map">
+	<![CDATA[
+		update qnaboard set answer=#{answer} where num=#{num}  
+	]]>
+	</update>
+	
+	<delete id="deleteQna" parameterType="int" >
+	<![CDATA[
+		delete qnaboard where num=#{num}  
+	]]>
+	</delete>
+	
+</mapper>
+   

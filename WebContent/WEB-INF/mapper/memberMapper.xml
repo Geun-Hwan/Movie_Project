@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.MemberDAO">
+	<insert id="insertMember"  parameterType="model.MemberVo">
+		<![CDATA[
+		insert into member (admin,name,birth,email,userid,userpwd,gender,reg_date,ban_date)			
+		values(0,#{name},#{birth},#{email},#{userId},#{userPwd},#{gender},sysdate+9/24,null)
+		  ]]>
+	</insert>
+	
+	<delete id="deleteMember" parameterType="String">
+	<![CDATA[
+			delete member where userid=#{userId}
+		  ]]>
+	</delete>
+	
+	<update id="updateMember" parameterType="model.MemberVo">
+		<![CDATA[
+		update member set name=#{name}, birth =#{birth}, gender=#{gender}, userpwd=#{userPwd} where userid=#{userId}			
+		  ]]>
+	</update>
+	
+	<select id="getPass" parameterType="String" resultType="String" >
+	<![CDATA[
+		select userpwd from member where userid=#{userId, jdbcType=VARCHAR}  
+	]]>
+	</select>
+	
+	<select id="infoMember" parameterType="String" resultType="model.MemberVo" >
+	<![CDATA[
+		select * from member where userid=#{userId, jdbcType=VARCHAR}  
+	]]>
+	</select>
+	
+	<select id="confrimID" parameterType="String" resultType="Integer" >
+	<![CDATA[
+		select count(*) from member where userid=#{userid}  
+	]]>
+	</select>
+	
+	<select id="allMember" resultType="model.MemberVo" >
+	<![CDATA[
+		select * from member where admin=0  
+	]]>
+	</select>
+	
+	<select id="confirmEamil" parameterType="String" resultType="Integer" >
+	<![CDATA[
+		select count(*) from member where email=#{email}
+	]]>
+	</select>
+	
+	<select id="getMail" parameterType="String" resultType="String" >
+	<![CDATA[
+		select email from member where userid=#{userid}
+	]]>
+	</select>
+	
+	<select id="findId" parameterType="map" resultType="String" >
+	<![CDATA[
+		select userid from member where email=#{email} and name=#{name}
+	]]>
+	</select>
+	
+	<select id="findPwd" parameterType="map" resultType="Integer" >
+	<![CDATA[
+		select count(*) from member where email=#{email} and userid=#{userid}
+	]]>
+	</select>
+	
+	<update id="changePw" parameterType="map">
+		<![CDATA[
+		update member set userpwd=#{userpw} where userid=#{userid} and email=#{email}			
+		  ]]>
+	</update>
+	
+	<update id="banMemberDo" parameterType="model.MemberVo">
+		<![CDATA[
+		update member set admin=#{admin},ban_date=#{ban_date, jdbcType=VARCHAR} where userid=#{userId}			
+		  ]]>
+	</update>
+	
+	<select id="banlist" resultType="model.MemberVo" >
+	<![CDATA[
+		select * from member where admin=3  
+	]]>
+	</select>
+	
+	<select id="banMember" parameterType="String" resultType="model.MemberVo" >
+	<![CDATA[
+		select * from member where ban_date=#{bandate}  
+	]]>
+	</select>
+	
+	<update id="permitMember" parameterType="model.MemberVo">
+		<![CDATA[
+		update member set admin=#{admin} where ban_date=#{ban_date} 			
+		  ]]>
+	</update>
+	
+	<update id="deleteBandate" parameterType="model.MemberVo">
+		<![CDATA[
+		update member set ban_date=#{ban_date} where admin=#{admin} 			
+		  ]]>
+	</update>
+	
+	<update id="changeBandate" parameterType="map">
+		<![CDATA[
+		update member set ban_date=#{ban_date} ,admin =3 where userid=#{userid} 			
+		  ]]>
+	</update>
+</mapper>
+   

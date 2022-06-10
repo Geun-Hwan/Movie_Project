@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.MovieDAO">
+
+	<insert id="insertMovie"  parameterType="model.MovieVo">
+		<![CDATA[
+		insert into movie (code,title,releasedate,runningtime,director,actor,grade,category,synopsis,poster,score,price,percent,nation)			
+		values(#{code},#{title},#{releaseDate, jdbcType=VARCHAR},#{runningTime,jdbcType=INTEGER},#{director},#{actor},#{grade},#{category},#{synopsis},#{poster},#{score},#{price},#{percent, jdbcType=DOUBLE},#{nation,jdbcType=VARCHAR})
+		  ]]>
+	</insert>
+	
+	<update id="updateMovie" parameterType="model.MovieVo">
+		<![CDATA[
+		update movie set title=#{title},price=#{price},director=#{director},actor=#{actor},poster=#{poster},synopsis=#{synopsis},percent=#{percent,jdbcType=DOUBLE}  where code=#{code}			
+		  ]]>
+	</update>
+	
+	<select id="infoMovie" parameterType="int" resultType="model.MovieVo" >
+	<![CDATA[
+		select * from movie where code=#{code}  
+	]]>
+	</select>
+	
+	<delete id="deleteMovie" parameterType="int">
+	<![CDATA[
+			delete movie where code=#{code}
+		  ]]>
+	</delete>
+	
+	<select id="allMovie" resultType="model.MovieVo" >
+	<![CDATA[
+		select * from movie order by percent desc  
+	]]>
+	</select>
+	
+	<select id="countMovie" resultType="Integer" >
+	<![CDATA[
+		select count(code) from movie  
+	]]>
+	</select>
+	
+	<select id="movieConfirm" parameterType="int" resultType="Integer" >
+	<![CDATA[
+		select count(*) from movie where code=#{code}  
+	]]>
+	</select>
+	
+	<select id="getSearch" parameterType="String" resultType="model.MovieVo" >
+	<![CDATA[
+		select * from movie where title LIKE '%'||#{searchTrim}||'%' order by percent desc  
+	]]>
+	</select>
+	
+	<select id="expectedMovie" resultType="model.MovieVo" >
+	<![CDATA[
+		select *from movie where TO_CHAR(SYSDATE+9/24,'YYYY.MM.DD') < releasedate order by percent desc   
+	]]>
+	</select>
+	
+	<select id="nowMovie" resultType="model.MovieVo" >
+	<![CDATA[
+		select *from movie where TO_CHAR(SYSDATE+9/24,'YYYY.MM.DD') >= releasedate order by percent desc   
+	]]>
+	</select>
+	
+	<select id="korSortMovie" resultType="model.MovieVo" >
+	<![CDATA[
+		select *from movie order by title asc   
+	]]>
+	</select>
+	
+	<delete id="deleteAllMovie" >
+	<![CDATA[
+			delete movie
+		  ]]>
+	</delete>
+</mapper>
+   

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.AnswerDAO">
+	<insert id="insertAnswer" parameterType="model.AnswerBoard">
+		<![CDATA[
+			insert into answerboard (num,userid,title,content,category,write_date)
+			values(#{num},#{userid},#{title},#{content},#{category},sysdate+9/24)
+		  ]]>
+	</insert>
+	
+	<select id='oneAnswer' parameterType="int" resultType="model.AnswerBoard">
+		<![CDATA[
+			select * from answerboard where num=#{num}
+			]]>
+	</select>
+	
+	<delete id="deleteAnswer" parameterType="int">
+	<![CDATA[
+			delete answerboard where num=#{num}
+			]]>
+	</delete>
+</mapper>
+   

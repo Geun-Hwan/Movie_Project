@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.ReviewDAO">
+
+	<insert id="writeReview"  parameterType="model.ReviewVo">
+		<![CDATA[
+		insert into review (code,content,write_date,userid,email,score,title,commentlike,changecheck)
+		values(#{code},#{content},sysdate+9/24,#{userid},#{email},#{score},#{title},0,0)
+		  ]]>
+	</insert>
+	
+	<update id="updateReview" parameterType="model.ReviewVo">
+		<![CDATA[
+		update review set title=#{title}, content=#{content}, score=#{score}, changecheck=#{changeCheck} where code=#{code} and userid=#{userid}			
+		  ]]>
+	</update>
+	
+	<delete id="deleteReview" parameterType="map">
+	<![CDATA[
+			delete review where code=#{code} and userid=#{userid}
+		  ]]>
+	</delete>
+	
+	<select id="oneReview" resultType="model.ReviewVo" parameterType="map" >
+	<![CDATA[
+		select * from review where code=#{code}and userid=#{userid} 
+	]]>
+	</select>
+	
+		
+	<select id="allReview" resultType="model.ReviewVo" parameterType="map">
+	<![CDATA[
+		select * from(select A.*,Rownum Rnum from(select *from review where code=#{code} order by]]><if test="sort == 1">write_date desc</if><if test="sort == 2">commentlike desc</if>
+	<![CDATA[
+	)A)where Rnum>=#{start} and Rnum <=#{end}
+	]]>
+	</select>
+	
+	<select id="myAllReview" resultType="model.ReviewVo" parameterType="map">
+	<![CDATA[
+		select * from(select A.*,Rownum Rnum from(select *from review where userid=#{userid} order by write_date desc)A)where Rnum>=#{start} and Rnum <=#{end}
+	]]>
+	</select>
+	
+	<select id="myReviewCount" resultType="Integer" parameterType="String">
+	<![CDATA[
+		select count(*) from review where userid=#{userid, jdbcType=VARCHAR}  
+	]]>
+	</select>
+	
+	<select id="countReview" parameterType="int" resultType="Integer" >
+	<![CDATA[
+		select count(code) from review where code=#{code}  
+	]]>
+	</select>
+	
+	<select id="confirmReview" parameterType="map" resultType="Integer" >
+	<![CDATA[
+		select count(code) from review where userid=#{userid} and code=#{code}  
+	]]>
+	</select>
+	
+	<update id="reviewLike" parameterType="map">
+		<![CDATA[
+		update review set commentlike=#{like} where userid=#{userid} and code=#{code}			
+		  ]]>
+	</update>
+
+</mapper>
+   

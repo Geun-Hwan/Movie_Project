@@ -1,0 +1,114 @@
+#pagingul {
+    text-align: center;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-right: 0;
+}
+
+#pagingul li {
+    text-align: center;
+    float: left;
+}
+
+#pagingul li a {
+    display: block;
+    font-size: 14px;
+    padding: 9px 12px;
+    border-right: solid 1px #ccc;
+    box-sizing: border-box;
+}
+
+#pagingul li.on {
+    background: #eda712;
+}
+
+#pagingul li.on a {
+    color: #fff;
+}
+
+/* ------------------------------------ */
+#tpagingul {
+    text-align: center;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-right: 0;
+}
+
+#tpagingul li {
+    text-align: center;
+    float: left;
+}
+
+#tpagingul li a {
+    display: block;
+    font-size: 14px;
+    padding: 9px 12px;
+    border-right: solid 1px #ccc;
+    box-sizing: border-box;
+}
+
+#tpagingul li.on {
+    background: #eda712;
+}
+
+#tpagingul li.on a {
+    color: #fff;
+}
+
+/* ------------------------------------ */
+#repagingul {
+    text-align: center;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-right: 0;
+}
+
+#repagingul li {
+    text-align: center;
+    float: left;
+}
+
+#repagingul li a {
+    display: block;
+    font-size: 14px;
+    padding: 9px 12px;
+    border-right: solid 1px #ccc;
+    box-sizing: border-box;
+}
+
+#repagingul li.on {
+    background: #0080ff;
+}
+
+#repagingul li.on a {
+    color: #fff;
+}
+
+/* ------------------------------------ */
+#tipagingul {
+    text-align: center;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-right: 0;
+}
+
+#tipagingul li {
+    text-align: center;
+    float: left;
+}
+
+#tipagingul li a {
+    display: block;
+    font-size: 14px;
+    padding: 9px 12px;
+    border-right: solid 1px #ccc;
+    box-sizing: border-box;
+}
+
+#tipagingul li.on {
+    background: #0080ff;
+}
+
+#tipagingul li.on a {
+    color: #fff;
+}
