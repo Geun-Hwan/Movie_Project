@@ -83,9 +83,9 @@ public class ReviewController {
 	@ResponseBody
 	public int reviewDelte(String userid,int code) {
 		
-		
 		int count =rdao.deleteReview(code, userid);
-		
+		System.out.println(userid);
+		System.out.println(code);
 		return count;
 	}
 

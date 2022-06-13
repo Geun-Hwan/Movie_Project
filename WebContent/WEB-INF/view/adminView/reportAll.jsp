@@ -164,7 +164,7 @@
 					</div>
 						<div class="form-group" style="display:flex; flex-direction:row;">
 							<label for="reson2" class="col-form-label">신고사유</label>												
-							<input type="text" class="form-control" name="reson2"id="reson2" style="width:360px; margin-left:15px;"readonly>
+							<input type="text" class="form-control" name="reson2" id="Reson2" style="width:360px; margin-left:15px;"readonly>
 						</div>
 						<div class="form-group" style="margin:0 auto; height:100px; display:flex; width:250px; padding-top:30px;">
 						<label for="ban_date" class="col-form-label">정지기간</label>

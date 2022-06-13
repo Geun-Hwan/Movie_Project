@@ -15,9 +15,9 @@ function reviewChange(index){
 	 
 }
 
-function reviewDelete(){
+function reviewDelete(index){
 	var code=$("#code").val();
-	var userid=$("#reuserid").text();
+	var userid=$("#reuserid"+index).text();
 	console.log(code);
 	if(confirm("정말 삭제 하시겠습니까?")){
 		$.ajax({

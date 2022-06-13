@@ -165,11 +165,12 @@ function reportAll(){
 		
 		var min =tomorrow.getFullYear() +'-'+month+'-'+day;
 		console.log(min);
+		console.log(reson);
 		
 		$("#ban_date").attr("min",min);
 		$("#ban_date").val(min);
-		$("#writeUser2").val(writer)
-		$("#reson2").val(reson)
+		$("#writeUser2").val(writer);
+		$("#Reson2").val(reson);
 		
 		$("#reportUser2").val(reportUser2);
 		$("#reportCode2").val(reportCode2);
@@ -192,6 +193,7 @@ function reportAll(){
 			complete : function(){
 				alert("해당 신고 반려");
 				$("#reportResult").modal("hide");
+				$(".modal-backdrop").remove();
 				reportAll();
 			}
 		});

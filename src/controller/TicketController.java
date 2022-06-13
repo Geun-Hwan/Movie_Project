@@ -116,7 +116,7 @@ public class TicketController {
 			}
 		}
 		remainSeat.add(seat.size());
-		seats = tdao.seatCheck(title, movieDate, "12:00", cinema);
+		seats = tdao.seatCheck(title, movieDate, "13:00", cinema);
 		seat = new ArrayList<String>();
 		if (seats.size() != 0) {
 			for (String s : seats) {
@@ -128,7 +128,7 @@ public class TicketController {
 			}
 		}
 		remainSeat.add(seat.size());
-		seats = tdao.seatCheck(title, movieDate, "14:00", cinema);
+		seats = tdao.seatCheck(title, movieDate, "16:00", cinema);
 		seat = new ArrayList<String>();
 		
 		if (seats.size() != 0) {
@@ -141,7 +141,7 @@ public class TicketController {
 			}
 		}
 		remainSeat.add(seat.size());
-		seats = tdao.seatCheck(title, movieDate, "16:00", cinema);
+		seats = tdao.seatCheck(title, movieDate, "19:00", cinema);
 		seat = new ArrayList<String>();		
 		if (seats.size() != 0) {
 			for (String s : seats) {

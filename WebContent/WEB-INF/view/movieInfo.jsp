@@ -227,7 +227,7 @@
 											<div style='margin-top:20px;'> 
 												<button class="custombutton"type="button"data-toggle="modal"data-target="#reviewChange" onclick="reviewChange('${status3.index}')" style="padding-left:0px; border:0; width:40px;"><span style=' font-size:11px;'>수정</span></button>
 												&nbsp;
-												<button class="custombutton" type="button" style="border:0; width:40px; padding-left:0px;"><span style=' font-size:11px;' onclick="reviewDelete()">삭제</span></button>
+												<button class="custombutton" type="button" style="border:0; width:40px; padding-left:0px;"><span style=' font-size:11px;' onclick="reviewDelete('${status3.index}')">삭제</span></button>
 											</div>
 											</c:when>
 										</c:choose>
@@ -290,7 +290,7 @@
 											<div style='margin-top:20px;'> 
 												<button class="custombutton"type="button"data-toggle="modal"data-target="#reviewChange" onclick="reviewChange('${status2.index}')" style="padding-left:0px; border:0; width:40px;"><span style=' font-size:11px;'>수정</span></button>
 												&nbsp;
-												<button class="custombutton" type="button" style="border:0; width:40px; padding-left:0px;"><span style=' font-size:11px;' onclick="reviewDelete()">삭제</span></button>
+												<button class="custombutton" type="button" style="border:0; width:40px; padding-left:0px;"><span style=' font-size:11px;' onclick="reviewDelete('${status2.index}')">삭제</span></button>
 											</div>
 											</c:when>
 										</c:choose>

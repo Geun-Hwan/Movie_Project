@@ -28,12 +28,11 @@ public class ReviewDAO {
 	}
 	
 	public int deleteReview(int code,String userid) {
-		int result=0;
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("code", code);
 		map.put("userid", userid);
 		
-		result = SqlSessionTemplate.delete("dao.ReviewDAO.deleteReview",map);
+		int result = SqlSessionTemplate.delete("dao.ReviewDAO.deleteReview",map);
 		return result;
 	}
 	

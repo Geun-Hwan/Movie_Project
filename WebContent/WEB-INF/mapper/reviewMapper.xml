@@ -17,7 +17,7 @@
 		  ]]>
 	</update>
 	
-	<delete id="deleteReview" parameterType="map">
+	<delete id="deleteReview" parameterType="map" >
 	<![CDATA[
 			delete review where code=#{code} and userid=#{userid}
 		  ]]>
