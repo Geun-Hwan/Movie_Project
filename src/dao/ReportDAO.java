@@ -59,4 +59,9 @@ public class ReportDAO {
 		
 		SqlSessionTemplate.delete("dao.ReportDAO.deleteReport",map);
 	}
+	
+	public void deleteReport(String writer) {
+		
+		SqlSessionTemplate.delete("dao.ReportDAO.deleteAllReport",writer);
+	}
 }

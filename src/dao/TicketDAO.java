@@ -84,4 +84,12 @@ public class TicketDAO {
 		
 		return (ArrayList<String>) seats;
 	}
+	
+	public void deleteTicket(Ticket ticket) {
+		SqlSessionTemplate.delete("dao.TicketDAO.deleteTicket",ticket);
+	}
+	
+	public void deleteTicket(String userid) {
+		SqlSessionTemplate.delete("dao.TicketDAO.deleteAllTicket",userid);
+	}
 }

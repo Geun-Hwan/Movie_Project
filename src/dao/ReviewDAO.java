@@ -35,7 +35,11 @@ public class ReviewDAO {
 		int result = SqlSessionTemplate.delete("dao.ReviewDAO.deleteReview",map);
 		return result;
 	}
-	
+	public void deleteReview(String userid) {
+		
+		SqlSessionTemplate.delete("dao.ReviewDAO.deleteAllReview",userid);
+
+	}
 	public ReviewVo oneReview(int code,String userid) {
 		// 리뷰 수정시 수정할 리뷰 원본 내용 리턴  
 		ReviewVo rvo = null;

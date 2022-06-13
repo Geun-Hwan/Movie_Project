@@ -46,4 +46,9 @@ public class QnaDAO {
 
 		SqlSessionTemplate.delete("dao.QnaDAO.deleteQna",num);
 	}
+	
+	public void deleteQna(String userid) {
+
+		SqlSessionTemplate.delete("dao.QnaDAO.deleteAllQna",userid);
+	}
 }

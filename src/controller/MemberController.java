@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import dao.AnswerDAO;
 import dao.MemberDAO;
 import dao.MovieDAO;
+import dao.QnaDAO;
 import dao.ReportDAO;
 import dao.ReviewDAO;
 import dao.TicketDAO;
@@ -52,6 +54,14 @@ public class MemberController {
 	@Autowired
 	@Lazy
 	TicketDAO tdao;
+	
+	@Autowired
+	@Lazy
+	QnaDAO qdao;
+	
+	@Autowired
+	@Lazy
+	AnswerDAO adao;
 	
 	@GetMapping("/myPage")
 	public String myPage(HttpServletRequest request) {
@@ -206,15 +216,25 @@ public class MemberController {
 	}
 	
 	
-	//회원 탈퇴 memberDelete
+	//회원 탈퇴 memberDelete 모든 정보 삭제.
 	@PostMapping("/merberDelete")
 	public void merberDelete(String userid,HttpSession session) {
 		
-		if(userid.equals("admin")) {
+		if(session.getAttribute("userid").equals("admin")) {
 		mdao.deleteMember(userid);
+		rdao.deleteReview(userid);
+		rpdao.deleteReport(userid);
+		tdao.deleteTicket(userid);
+		qdao.deleteQna(userid);
+		adao.deleteAnswer(userid);
 		// 관리자로 탈퇴 시킬땐 세션 초기화 X, 매개변수 추가해서 관리자 아닐때만 세션 초기화
 		}else {
 			mdao.deleteMember(userid);
+			rdao.deleteReview(userid);
+			rpdao.deleteReport(userid);
+			tdao.deleteTicket(userid);
+			qdao.deleteQna(userid);
+			adao.deleteAnswer(userid);
 			session.invalidate();
 		}
 	}

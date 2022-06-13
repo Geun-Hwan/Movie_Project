@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -159,5 +160,15 @@ public class TicketController {
 	@GetMapping("/timetable")
 	public String timetable() {
 		return "timetable";
+	}
+	@PostMapping("/ticketDelete")
+	@ResponseBody
+	public int ticketDelete(@ModelAttribute Ticket ticket, HttpSession session) {
+		int result =0;
+		if(session.getAttribute("userid").equals("admin")) {
+			result=1;
+		}
+		tdao.deleteTicket(ticket);
+		return result;
 	}
 }

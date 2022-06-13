@@ -404,7 +404,7 @@ function myAsk(){
 }
 
 function selfDeleteMember(){
-	var delck=confirm("정말 탈퇴 하시겠습니까?");
+	var delck=confirm("정말 탈퇴 하시겠습니까? 모든 활동 내역이 삭제 됩니다.");
 	var inpass;
 	if(delck){
 		inpass=prompt("탈퇴하려면 비밀번호를 입력하세요.");	 // 모달로 변경
@@ -481,6 +481,66 @@ function qnaInfo(num){
 	$("#qna_category").val(category);
 	$("#qna_content").val(content);
 	
+}
+
+function deleteTicket(index){
+	var userid=$("#duserid"+index).val();
+	var title = $("#dtitle"+index).text();
+	var cinema = $("#dcinema"+index).text();
+	var seat = $("#dseat"+index).text();
+	var date = $("#ddate"+index).text();
+	var time = $("#dtime"+index).text();
+	var admin =0;
+	var today = new Date();
+	
+	console.log(userid);
+	console.log(title);
+	console.log(cinema);
+	console.log(seat);
+	console.log(date);
+	console.log(time);
+	
+	if(today>new Date(date+time)){
+		alert("영화시작 전까지만 취소 가능합니다.")
+		return;
+	}else{
+		if(confirm("정말 취소 하시겠습니까?")){
+			$.ajax({
+		        type : "POST",
+		        url : "ticketDelete",
+		        async : true,
+		        data : {
+		        	userid:userid,
+		        	title:title,
+		        	cinema:cinema,
+		        	seat:seat,
+		        	movieDate:date,
+		        	movieTime:time
+		        	},
+		        dataType : "html",
+		        cache : false,
+		        beforeSend : function(){
+		        	$('.wrap-loading').removeClass('display-none');
+					$.blockUI({ message: null });
+		        },
+		        success : function(data){
+		        	admin=data;
+		        },
+		        complete : function(){
+		        	$('.wrap-loading').addClass('display-none');
+					$.unblockUI();
+					if(admin==0){
+						location.href="myPage?userid="+userid;
+						alert("취소 완료");
+					}
+					if(admin==1){
+						location.href="adminMyPage?userid=admin";
+						alert("취소 완료");
+					}
+		        }
+			});	
+		}
+	}
 }
 $('.modal').on('hidden.bs.modal', function (e) {
 

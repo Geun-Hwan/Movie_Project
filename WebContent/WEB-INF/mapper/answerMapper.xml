@@ -5,8 +5,8 @@
 <mapper namespace="dao.AnswerDAO">
 	<insert id="insertAnswer" parameterType="model.AnswerBoard">
 		<![CDATA[
-			insert into answerboard (num,userid,title,content,category,write_date)
-			values(#{num},#{userid},#{title},#{content},#{category},sysdate+9/24)
+			insert into answerboard (num,userid,title,content,category,write_date,ask_id)
+			values(#{num},#{userid},#{title},#{content},#{category},sysdate+9/24,#{ask_id})
 		  ]]>
 	</insert>
 	
@@ -19,6 +19,12 @@
 	<delete id="deleteAnswer" parameterType="int">
 	<![CDATA[
 			delete answerboard where num=#{num}
+			]]>
+	</delete>
+	
+	<delete id="deleteAllAnswer" parameterType="String">
+	<![CDATA[
+			delete answerboard where ask_id=#{ask_id}
 			]]>
 	</delete>
 </mapper>

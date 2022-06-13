@@ -48,5 +48,17 @@
 		select seat from ticket where title=#{title} and movieDate=#{movieDate} and movieTime=#{movieTime} and cinema=#{cinema}
 	]]>
 	</select>
+	
+	<delete id="deleteTicket" parameterType="model.Ticket">
+	<![CDATA[
+		delete ticket where userid=#{userid} and title=#{title} and cinema=#{cinema} and movieDate=#{movieDate} and movieTime=#{movieTime} and seat = #{seat}
+	]]>
+	</delete>
+	
+	<delete id="deleteAllTicket" parameterType="String">
+	<![CDATA[
+		delete ticket where userid=#{userid}
+	]]>
+	</delete>
 </mapper>
    

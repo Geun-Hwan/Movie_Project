@@ -27,4 +27,10 @@ public class AnswerDAO {
 		
 		SqlSessionTemplate.delete("dao.AnswerDAO.deleteAnswer",num);
 	}
+	
+	public void deleteAnswer(String ask_id) {
+		
+		SqlSessionTemplate.delete("dao.AnswerDAO.deleteAllAnswer",ask_id);
+	}
+	
 }

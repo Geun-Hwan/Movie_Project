@@ -22,6 +22,11 @@
 			delete review where code=#{code} and userid=#{userid}
 		  ]]>
 	</delete>
+	<delete id="deleteAllReview" parameterType="String" >
+	<![CDATA[
+			delete review where userid=#{userid}
+		  ]]>
+	</delete>
 	
 	<select id="oneReview" resultType="model.ReviewVo" parameterType="map" >
 	<![CDATA[

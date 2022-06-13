@@ -8,17 +8,21 @@
 			<div style="text-align:center;">
 			<table border=1 style="margin:0 auto; border:0.5px solid rgba(0,0,0,.2);">
 			<tr style="text-align:center;">
-			<th width="100">예매날짜</th><th width="400">영화제목</th><th width="110">예매자</th><th width="160">극장/상영관</th><th>상영일</th><th width="70">상영시간</th><th width="40">인원</th><th width="80">금액</th></tr>
+			<th width="100">예매날짜</th><th width="400">영화제목</th><th width="110">예매자</th><th width="160">극장/상영관</th><th>상영일</th><th width="70">상영시간</th><th width="40">인원</th><th width="80">금액</th><th>취소하기</th></tr>
 			<c:forEach var="ticket" items="${ticketList}" varStatus="status">
 				<tr height=40>
 					<td style="text-align:center;">${ticket.ticketDate}</td>
-					<td>${ticket.title}</td>
+					<td id="dtitle${status.index}">${ticket.title}</td>
 					<td style="text-align:center;">${ticket.userid}</td>
-					<td>${ticket.cinema}</td>
-					<td>${ticket.movieDate}</td>
-					<td style="text-align:center;">${ticket.movieTime}</td>
+					<td id="dcinema${status.index}">${ticket.cinema}</td>
+					<td id="ddate${status.index}">${ticket.movieDate}</td>
+					<td id="dtime${status.index}" style="text-align:center;">${ticket.movieTime}</td>
 					<td style="text-align:center;">${ticket.person}</td>
 					<td style="text-align:center;">${ticket.price}원</td>
+					<td style="text-align:center;"><a href="#!"onclick="deleteTicket('${status.index}')">취소</a>
+					<input type="hidden" id="duserid${status.index}" value="${ticket.userid}">
+					<span style="display:none;"id="dseat${status.index}">${ticket.seat}</span>
+					</td>
 				</tr>
 			</c:forEach>
 			</table>	

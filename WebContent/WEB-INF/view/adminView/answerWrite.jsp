@@ -21,6 +21,7 @@
 							<input type="text" class="form-control" id="admin_userid" name="admin_userid" readonly style="width:200px; margin-left:30px;" value="${userid}"/> 
 							<label for="admin_category" class="col-form-label" style="margin-left:30px;">답변유형</label>
 							<input type="text" class="form-control" id="admin_category" name="admin_category" readonly style="width:80px; margin-left:20px;"/>
+							<input type="hidden" id="ask_userid">
 					</div>
 			
 						<div class="form-group" style="height:300px;">

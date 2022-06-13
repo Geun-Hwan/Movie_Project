@@ -34,5 +34,11 @@
 	]]>
 	</delete>
 	
+	<delete id="deleteAllQna" parameterType="String" >
+	<![CDATA[
+		delete qnaboard where userid=#{userid}  
+	]]>
+	</delete>
+	
 </mapper>
    

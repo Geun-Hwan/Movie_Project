@@ -16,20 +16,21 @@
 					</c:when>
 					<c:otherwise>
 					<div class="movie-reserve-list">
-					<c:forEach items="${tlist}" var="ticket">
+					<c:forEach items="${tlist}" var="ticket" varStatus="status">
 										
 					<div class="movie-reserve">
-						<div class="movie-reserve-age">${ticket.movieAge}</div>
-						<div class="movie-reserve-title">${ticket.title}</div>
+						<div class="movie-reserve-age"><a href="#!"onclick="deleteTicket('${status.index}')"><span style="float:left;">예매취소</span></a>${ticket.movieAge}</div>
+						<div class="movie-reserve-title" id="dtitle${status.index}"style="text-overflow:ellipsis;white-space:nowrap;overflow: hidden;">${ticket.title}</div>
 						<div class="movie-reserve-theater-wrapper">
-							<div>${ticket.cinema}</div>
+							<div id="dcinema${status.index}">${ticket.cinema}</div>
+							<input type="hidden" id="duserid${status.index}" value="${ticket.userid}">
 							&nbsp;/&nbsp;
 							<div class="ticket-numeber">${ticket.person}장</div>
 						</div>
-						<div class="movie-reserve-seats">${ticket.seat}</div>
+						<div class="movie-reserve-seats" id="dseat${status.index}">${ticket.seat}</div>
 						<div class="movie-reserve-date-wrapper">
-							<div class="movie-reserve-date">${ticket.movieDate}</div>
-							<div class="movie-reserve-runningTime">${ticket.movieTime}</div>
+							<div class="movie-reserve-date" id="ddate${status.index}">${ticket.movieDate}</div>
+							<div class="movie-reserve-runningTime" id="dtime${status.index}">${ticket.movieTime}</div>
 						</div>
 						<div class="movie"></div>
 

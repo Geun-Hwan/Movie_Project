@@ -101,17 +101,18 @@
 								Ticket ticket = tlist.get(i);
 					%>
 					<div class="movie-reserve">
-						<div class="movie-reserve-age"><%=ticket.getMovieAge()%></div>
-						<div class="movie-reserve-title" style="text-overflow:ellipsis;white-space:nowrap;overflow: hidden;"><%=ticket.getTitle() %></div>
+						<div class="movie-reserve-age"><a href="#!"onclick="deleteTicket(<%=i%>)"><span style="float:left;">예매취소</span></a><%=ticket.getMovieAge()%></div>
+						<div class="movie-reserve-title"id="dtitle<%=i%>" style="text-overflow:ellipsis;white-space:nowrap;overflow: hidden;"><%=ticket.getTitle() %></div>
 						<div class="movie-reserve-theater-wrapper">
-							<div><%=ticket.getCinema() %></div>
+							<div id="dcinema<%=i%>"><%=ticket.getCinema() %></div>
+							<input type="hidden" id="duserid<%=i%>" value="<%=ticket.getUserid()%>">
 							&nbsp;/&nbsp;
 							<div class="ticket-numeber"><%=ticket.getPerson() %>장</div>
 						</div>
-						<div class="movie-reserve-seats"><%=ticket.getSeat() %></div>
+						<div class="movie-reserve-seats" id="dseat<%=i%>"><%=ticket.getSeat() %></div>
 						<div class="movie-reserve-date-wrapper">
-							<div class="movie-reserve-date"><%=ticket.getMovieDate() %></div>
-							<div class="movie-reserve-runningTime"><%=ticket.getMovieTime() %></div>
+							<div class="movie-reserve-date" id="ddate<%=i%>"><%=ticket.getMovieDate() %></div>
+							<div class="movie-reserve-runningTime" id="dtime<%=i%>"><%=ticket.getMovieTime() %></div>
 						</div>
 						<div class="movie"></div>
 

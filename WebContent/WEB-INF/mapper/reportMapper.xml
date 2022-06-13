@@ -36,5 +36,11 @@
 	]]>
 	</delete>
 	
+	<delete id="deleteAllReport" parameterType="String">
+	<![CDATA[
+		delete report where writer=#{writer}
+	]]>
+	</delete>
+	
 </mapper>
    

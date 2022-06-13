@@ -30,6 +30,13 @@
 		</script>
 	</c:when>
 </c:choose>
+
+<c:if test='${member.userId == null }'>
+	<script type="text/javascript">
+		alert("탈퇴한 회원 또는 존재하지 않는 회원입니다.");
+		location.href="adminMyPage?userid=admin"
+	</script>
+</c:if>
 <div style="width:1400px;display:flex; margin:0 auto;">
 <div class="border-end bg-white" id="sidebar-wrapper"
 			style="width: 200px; margin: 0 auto; padding-top: 40px; padding-right: 40px; margin-right:20px;">

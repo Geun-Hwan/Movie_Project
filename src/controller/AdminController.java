@@ -138,6 +138,7 @@ public class AdminController {
 	public String memberInfo(HttpServletRequest request) {
 		
 		MemberVo member=mdao.infoMember(request.getParameter("userid"));
+		
 		request.setAttribute("member", member);
 		
 		return "memberInfo";
@@ -528,12 +529,14 @@ public class AdminController {
 		String content = request.getParameter("admin_content");
 		String userid = request.getParameter("admin_userid");
 		String category = request.getParameter("admin_category");
+		String ask_id= request.getParameter("ask_userid");
 		AnswerBoard ans = new AnswerBoard();
 		ans.setNum(num);
 		ans.setUserid(userid);
 		ans.setTitle(title);
 		ans.setCategory(category);
 		ans.setContent(content);
+		ans.setAsk_id(ask_id);
 		adao.insertAnswer(ans);
 		System.out.println("답변 완료");
 		qdao.answerCheck(answer,num);

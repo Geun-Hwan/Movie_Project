@@ -7,7 +7,14 @@ public class AnswerBoard {
 	private String content;
 	private String category;
 	private String write_date;
+	private String ask_id;
 	
+	public String getAsk_id() {
+		return ask_id;
+	}
+	public void setAsk_id(String ask_id) {
+		this.ask_id = ask_id;
+	}
 	public int getNum() {
 		return num;
 	}

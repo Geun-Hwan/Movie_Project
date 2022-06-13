@@ -327,6 +327,7 @@ function reportAll(){
 		
 		var category=$("#qna_category"+num).val();
 		var content=$("#qna_content"+num).val();
+		var userid = $("#qna_userid"+num).val();
 		var answer=$("#qna_answer"+num).val();
 		
 		if(answer !=""){
@@ -335,6 +336,7 @@ function reportAll(){
 		}
 		$("#admin_category").val(category);
 		$("#answerNum").val(num);
+		$("#ask_userid").val(userid);
 		
 		$("#answerWriteform").modal("show");
 	}
