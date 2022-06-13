@@ -241,6 +241,7 @@ function reportAll(){
 					}
 					});
 				$("#reportResult").modal("hide");
+				$(".modal-backdrop").remove();
 				banUserAll();
 				$(".custum-list").removeClass("liston");
 				$(".custum-list").eq(3).addClass("liston");

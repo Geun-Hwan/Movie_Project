@@ -65,7 +65,6 @@ public class QnaController {
 	@GetMapping("/Oneone")
 	public String Oneone(HttpSession session,Model model) {
 		System.out.println("Oneone");
-	
 		String userid = (String)session.getAttribute("userid");
 		MemberVo member = mdao.infoMember(userid);
 		model.addAttribute("member",member);
