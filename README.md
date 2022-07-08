@@ -81,8 +81,8 @@
 ## 주요 코드👀
 
 ### 카카오 결제 api 
-> 카카오페이 결제를 구현하며 해당 코드의 흐름을 이해하는데 수월했음. <br>
-iamport 홈페이지에서 미리 부여 받은 코드를 이용했다.
+iamport 홈페이지에서 미리 부여 받은 코드를 이용했다.<br>
+결제성공시 예약정보를 DB에 저장하도록 했음.
  ```js
  $(function(){
         var IMP = window.IMP; 
@@ -110,8 +110,6 @@ iamport 홈페이지에서 미리 부여 받은 코드를 이용했다.
 ---
 
 ### 파일 업로드 처리 
->로컬 환경에서는 업로드를 해도 프로젝트 폴더에 해당 파일이 보이지 않아 헤맸다.
-<br>톰켓 서버 설정에서 publishing 설정 후 해결되었음.
 
 ```java
 @PostMapping("/qnaWrite.do")
@@ -159,117 +157,21 @@ iamport 홈페이지에서 미리 부여 받은 코드를 이용했다.
 	    response.getOutputStream().close();
 	}
 ```
-###  페이징 처리 코드 js, java
-```js
-
-$.ajax({
-				type : "post",
-					url : "reviewPaging",
-					data : {
-						pageNum : pageNum,
-						code : code,
-						sort : sort
-					},
-					async: true,
-					dataType : 'json',
-					beforeSend : function(xhr){
-						$(".wrap-loading").removeClass('display-none');
-						$.blockUI({ message: null }); 
-					},
-					complete : function(){
-						$.ajax({
-							type : "POST",
-							url : "reviewBoard",
-							async : false,
-							dataType : "html",
-							cache : false,
-							success : function(data2) {
-								$("#checkout").children().remove();
-								$('#checkout').html(data2);
-								$(".wrap-loading").addClass('display-none'); 
-								$.unblockUI();
-								var cur=pageNum; //선택한 페이지 링크 제거
-								$("#"+cur).remove('href');
-							}
-						});
-					}
-			});
-```
-
-```java
-@PostMapping("/reviewPaging")
-	@ResponseBody
-	public void reviewList(String pageNum,int code,int sort,HttpSession session) {
-	
-		
-		Double currentPage = Double.parseDouble(pageNum);
-		ReviewDAO rdao = new ReviewDAO();
-		int totalData = rdao.countReview(code);
-		int pageCount =10;
-		Double dataPerPage=6.0;
-		int totalPage=(int)Math.ceil(totalData / dataPerPage);
-		
-		int start = 1+(Integer.parseInt(pageNum)-1)*6;
-		int end =(int)(dataPerPage*currentPage);
-		if(totalData%6 !=0 && currentPage ==totalPage) {
-			end=totalData;
-		}
-
-		if(totalPage<pageCount) {
-			pageCount=totalPage;
-		}
-		
-		ArrayList<ReviewVo> rlist=rdao.allReview(code, start, end,sort);
-		int rcount=rlist.size()/2;
-		if(rlist.size()%2==0&&rlist.size()!=0) {
-			rcount--;
-		}
-		
-		int pageGroup =(int)Math.ceil(currentPage / pageCount); // 페이지 그룹
-		int last = pageGroup * pageCount; //화면에 보여질 마지막 페이지 번호
-		if(last>totalPage) {
-			last=totalPage;
-		}
-		
-		int first = (pageGroup-1)*pageCount+1;
-		
-		int next = last+1;
-		int prev = first-1;
-		 if(totalData ==0){
-			  first=1;
-			  prev=0;
-		 }
-		 
-		 session.setAttribute("rlist", rlist);
-		 session.setAttribute("rcount", rcount);
-		 session.setAttribute("currentPage", currentPage);
-		 session.setAttribute("totalData", totalData);
-		 session.setAttribute("pageCount", pageCount);
-		 session.setAttribute("totalPage", totalPage);
-		 session.setAttribute("pageGroup", pageGroup);
-		 session.setAttribute("last", last);
-		 session.setAttribute("first", first);
-		 session.setAttribute("next", next);
-		 session.setAttribute("prev", prev);	
-	}
-```
-<br>
-
 ### 페이징처리😂
-<br>
 
-페이징 처리를 구현할 때 웹페이지의 이동 없이 처리하고 싶었는데  방법을 몰라 헤매다<br>
+페이징 처리를 구현할 때 웹페이지의 이동 없이(비동기) 처리하기 위해<br>
 
-ajax통신이란걸 알게되고  **ajax** 와 **session**을 이용하여 구현하였다.<br>
+**ajax** 와 **session**을 이용하여 구현하였다.<br>
 
 페이징번호 클릭시 ajax 통신으로 해당 번호를 넘겨 주어 미리 구현한 코드를 이용해 session을 저장<br>
 
 html에 해당 session 값을 뿌려주어 페이징 처리를 구현<br>
 
-이후 한번 구현해놓은 코드를 이용하여 여러 방면에서 이용하였다.
-
 
 ### 좌석처리🪑
+
+예약된 좌석의 처리를 위해 좌석을 화면에 띄워주기 전 예약된 좌석의 버튼을 비활성화 하였음.<br>
+영화,상영관,날짜,시간을 넘겨주어 해당하는 예약내역이 있는지 확인<br>
 아래 링크 참고 <br>
 
 [선택한 좌석처리 js 🚗](https://github.com/Geun-Hwan/Movie_Project/blob/master/WebContent/resources/js/seat.js)   
