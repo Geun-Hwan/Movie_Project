@@ -178,4 +178,20 @@ html에 해당 session 값을 뿌려주어 페이징 처리를 구현<br>
 
 [예약된 좌석처리 js 🚗 ](https://github.com/Geun-Hwan/Movie_Project/blob/master/WebContent/resources/js/ticket.js)   
 
+### 참고한 블로그
 
+https://hoing.io/archives/24492
+
+https://velog.io/@kiki3700/%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B6%80%ED%8A%B8-%EC%98%A4%EB%9D%BC%ED%81%B4-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-db-%EC%97%B0%EA%B2%B0autonomous-database#applicationpropertiesdata-source
+
+https://drsggg.tistory.com/403
+
+https://chlee21.tistory.com/170
+
+https://electronlibrary.tistory.com/342
+
+https://loy124.tistory.com/193
+
+https://mchch.tistory.com/140?category=896023
+
+https://bemeal2.tistory.com/44
