@@ -22,6 +22,20 @@
           <warSourceDirectory>WebContent</warSourceDirectory>
         </configuration>
       </plugin>
+      <plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat7-maven-plugin</artifactId>
+          <version>2.2</version>
+          <configuration>
+              <port>8080</port>
+              <path>/</path>
+              <uriEncoding>UTF-8</uriEncoding>
+              <warSourceDirectory>${basedir}/WebContent</warSourceDirectory>
+              <systemProperties>
+                <project.basedir>${project.basedir}</project.basedir>
+              </systemProperties>
+          </configuration>
+      </plugin>
     </plugins>
   </build>
   <!-- servlet-api,jsp-api,jstl,springMVC -->

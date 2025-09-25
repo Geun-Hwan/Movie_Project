@@ -17,7 +17,7 @@ public class NoticeDAO {
 	SqlSessionTemplate SqlSessionTemplate;
 
 	public void insertNotice(NoticeBoard not) {
-		SqlSessionTemplate.insert("dao.NoticeDAO.insertNotice", not);
+		// SqlSessionTemplate.insert("dao.NoticeDAO.insertNotice", not);
 	}
 
 	public ArrayList<NoticeBoard> allNotice(int start, int end) {
@@ -25,32 +25,32 @@ public class NoticeDAO {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		list =SqlSessionTemplate.selectList("dao.NoticeDAO.allNotice",map);
+		// list =SqlSessionTemplate.selectList("dao.NoticeDAO.allNotice",map);
 		return (ArrayList<NoticeBoard>) list;
 	}
 
 	public int noticeCount() {
 		int count = 0;
-		
-		count =SqlSessionTemplate.selectOne("dao.NoticeDAO.noticeCount");
-				
+
+		// count =SqlSessionTemplate.selectOne("dao.NoticeDAO.noticeCount");
+
 		return count;
 	}
 
 	public NoticeBoard readNotice(int num) { // 게시글 클릭시
 		NoticeBoard notice = null;
-		SqlSessionTemplate.update("dao.NoticeDAO.readCountUp",num);
-		notice = SqlSessionTemplate.selectOne("dao.NoticeDAO.readNotice",num);
-		
+		// SqlSessionTemplate.update("dao.NoticeDAO.readCountUp",num);
+		// notice = SqlSessionTemplate.selectOne("dao.NoticeDAO.readNotice",num);
+
 		return notice;
 	}
 
 	public void noticeUpdate(NoticeBoard not) {
-		SqlSessionTemplate.update("dao.NoticeDAO.noticeUpdate",not);
+		SqlSessionTemplate.update("dao.NoticeDAO.noticeUpdate", not);
 	}
 
 	public void noticeDelete(int num) {
-		
-	SqlSessionTemplate.delete("dao.NoticeDAO.noticeDelete",num);
+
+		SqlSessionTemplate.delete("dao.NoticeDAO.noticeDelete", num);
 	}
 }

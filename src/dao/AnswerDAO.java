@@ -11,26 +11,27 @@ public class AnswerDAO {
 
 	@Autowired
 	SqlSessionTemplate SqlSessionTemplate;
-	
+
 	public void insertAnswer(AnswerBoard ans) {
-		
-		SqlSessionTemplate.selectOne("dao.AnswerDAO.insertAnswer",ans);
+
+		SqlSessionTemplate.selectOne("dao.AnswerDAO.insertAnswer", ans);
 	}
-	
+
 	public AnswerBoard oneAnswer(int num) {
-		
-		AnswerBoard ans =SqlSessionTemplate.selectOne("dao.AnswerDAO.oneAnswer",num);
-		return ans;
+
+		// AnswerBoard ans =SqlSessionTemplate.selectOne("dao.AnswerDAO.oneAnswer",num);
+		// return ans;
+		return null;
 	}
-	
+
 	public void deleteAnswer(int num) {
-		
-		SqlSessionTemplate.delete("dao.AnswerDAO.deleteAnswer",num);
+
+		SqlSessionTemplate.delete("dao.AnswerDAO.deleteAnswer", num);
 	}
-	
+
 	public void deleteAnswer(String ask_id) {
-		
-		SqlSessionTemplate.delete("dao.AnswerDAO.deleteAllAnswer",ask_id);
+
+		SqlSessionTemplate.delete("dao.AnswerDAO.deleteAllAnswer", ask_id);
 	}
-	
+
 }
